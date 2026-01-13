@@ -1,5 +1,6 @@
 # Image Concatenator (Flask + Pillow) — with reorder, resize, alignment, packaging tips
-# Vibe coded with GitHub Copilot
+
+Obs: Vibe coded with GitHub Copilot
 
 This repository contains a small local web app that concatenates images with features:
 - Drag & drop reordering in the browser (uploads and server-folder picks)
