@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Image Concatenator</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Image Concatenator</h1>
+
+    <form id="concatForm" enctype="multipart/form-data">
+      <section class="panel">
+        <h2>Mode</h2>
+        <label><input type="radio" name="mode" value="upload" checked> Upload images from my machine</label><br/>
+        <label><input type="radio" name="mode" value="server"> Use images from a server folder</label>
+      </section>
+
+      <section class="panel" id="uploadSection">
+        <h2>Upload images</h2>
+        <input type="file" id="images" name="images" multiple accept="image/*" />
+        <p class="hint">Select multiple files. Use the preview below to reorder images by dragging them.</p>
+        <div id="uploadPreview" class="thumb-list"></div>
+      </section>
+
+      <section class="panel" id="serverSection" style="display:none;">
+        <h2>Server folder</h2>
+        <label>Folder path (relative to app root): <input type="text" id="folder" name="folder" value="." /></label>
+        <button type="button" id="listBtn">List images</button>
+        <div id="serverList" class="thumb-list"></div>
+        <p class="hint">Type a folder path on the server and click "List images". Then drag to reorder picks.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Options</h2>
+        <label>Orientation:
+          <select name="orientation" id="orientation">
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+          </select>
+        </label>
+        <br/>
+        <label>Alignment:
+          <select name="alignment" id="alignment">
+            <option value="center">Center</option>
+            <option value="start">Top / Left</option>
+            <option value="end">Bottom / Right</option>
+          </select>
+        </label>
+        <br/>
+        <label>Resize mode:
+          <select name="resize_mode" id="resize_mode">
+            <option value="none">No resizing</option>
+            <option value="match_height">Match height (good for horizontal)</option>
+            <option value="match_width">Match width (good for vertical)</option>
+            <option value="fit_max">Fit within max width/height</option>
+          </select>
+        </label>
+        <div id="fitInputs" style="display:none; margin-top:8px;">
+          <label>Max width (px): <input type="number" name="max_width" id="max_width" min="1" /></label>
+          <label>Max height (px): <input type="number" name="max_height" id="max_height" min="1" /></label>
+          <p class="hint">Leave blank to only constrain one dimension.</p>
+        </div>
+
+        <br/>
+        <label>Output filename: <input type="text" name="output_name" id="output_name" value="output.png" /></label>
+        <br/>
+        <label>Save option:
+          <select name="save_option" id="saveOption">
+            <option value="download" selected>Download single file</option>
+            <option value="save">Save to server folder</option>
+          </select>
+        </label>
+        <div id="saveFolderRow" style="display:none;">
+          <label>Save folder (relative to app root): <input type="text" name="save_folder" id="save_folder" value="outputs" /></label>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit">Concatenate</button>
+      </div>
+    </form>
+
+    <div id="result"></div>
+
+    <footer>
+      <p>Run locally, then open <code>http://127.0.0.1:5000/</code> in your browser.</p>
+    </footer>
+  </div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
